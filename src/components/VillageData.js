@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 const VillageData = () => {
  const [data, setData] = useState({ resources: [], buildings: [], timestampNow: '' });
+ const [resources, setResources] = useState({});
+
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +14,16 @@ const VillageData = () => {
     .then(response => response.json())
     .then(data => {
         setData(data);
-        console.log(data)
+        // Initialisieren der Ressourcen mit ihren Anfangswerten
+        const initialResources = {};
+        const now = new Date();
+        data.resources.forEach(resource => {
+            const givenTime = new Date(resource.updateTime);
+            const hoursSinceLastUpdate = (now-givenTime)/1000/3600;       
+            initialResources[resource.resourceName.toLowerCase()] = resource.resourceAtUpdateTime + hoursSinceLastUpdate*resource.resourceIncome;
+        });
+        setResources(initialResources);
+        
         setLoading(false);
     })
     .catch(error => {
@@ -20,6 +31,22 @@ const VillageData = () => {
         setLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setResources(prevResources => {
+        const updatedResources = { ...prevResources };
+        data.resources.forEach(resource => {
+          const resourceName = resource.resourceName.toLowerCase();    
+          updatedResources[resourceName] += resource.resourceIncome/3600;
+        });
+        return updatedResources;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [data.resources]);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -29,16 +56,20 @@ const VillageData = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  // MVP: Die Resourcen müssen noch mit Script berechnet werden
   return (
     <div>
     <h1>Village</h1>
     <h2>Resources</h2>
+    <div>
     <ul>
-        {data.resources.map(resource => (
-            <li key={resource.resourceId}>{resource.resourceName}: {resource.resourceAtUpdateTime}</li>
-        ))}
+        <li>Stone: {Math.floor(resources.stone*100)/100} </li>
+        <li>Food: {Math.floor(resources.food*100)/100}  </li>
+        <li>Wood: {Math.floor(resources.wood*100)/100}  </li>
+        <li>Iron: {Math.floor(resources.iron*100)/100}  </li>
     </ul>
+
+    </div>
+    
     <h2>Buildings</h2>
     <ul>
         {
