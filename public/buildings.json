@@ -1,0 +1,105 @@
+
+{
+    "0": {
+        "name" : "city hall",
+        "levels": {
+            "1" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            },
+            "2" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            }
+        }
+      },
+    "1": {
+        "name" : "mill",
+        "levels": {
+            "1" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                },
+                "outcome": {
+                    "1": {
+                        "name": "food",
+                        "value": "TODO"
+                    }
+                }
+
+            },
+            "2" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            }
+        }
+    },
+    "2": {
+       "name" : "lumberjack",
+        "levels": {
+            "1" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            },
+            "2" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            }
+        }
+    },
+    "3": {
+        "name" : "mason",
+        "levels": {
+            "1" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            },
+            "2" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            }
+        }
+    },
+    "4": {
+        "name" : "iron mine",
+        "levels": {
+            "1" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            },
+            "2" : {
+                "buildingtime": 200,
+                "updatecosts": {
+                    "stone": 100,
+                    "wood": 100
+                }
+            }
+        }
+    }
+}
