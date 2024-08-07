@@ -12,7 +12,9 @@ const VillageData = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8080/village/data')
+        //TODO: PathParameter (z.B. localhost:3000/village/1) übergeben
+        const villageId = 1;
+        fetch(`http://localhost:8080/village/${villageId}/data`)
         .then(response => response.json())
         .then(data => {
             setData(data);
