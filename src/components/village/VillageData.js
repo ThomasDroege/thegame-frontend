@@ -1,19 +1,18 @@
 
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './village.scss';
 
 const VillageData = () => {
+    const { villageId } = useParams();
     const [data, setData] = useState({ resources: [], buildings: [], timestampNow: '' });
     const [resources, setResources] = useState({});
     const [buildingsdata, setBuildingsData] = useState(null); 
-
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        //TODO: PathParameter (z.B. localhost:3000/village/1) übergeben
-        const villageId = 1;
         fetch(`http://localhost:8080/village/${villageId}/data`)
         .then(response => response.json())
         .then(data => {
@@ -24,7 +23,7 @@ const VillageData = () => {
                 const givenTime = new Date(resource.updateTime);
                 const hoursSinceLastUpdate = (now-givenTime)/1000/3600;       
                 initialResources[resource.resourceName.toLowerCase()] = resource.resourceAtUpdateTime + hoursSinceLastUpdate*resource.resourceIncome;
-            });
+            }, [villageId]);
             setResources(initialResources);
             
             setLoading(false);

@@ -1,10 +1,14 @@
 import './main.scss';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import VillageData from './components/village/VillageData';
 
 function App() {
   return (
-    <VillageData />
-
+    <Router>
+        <Routes>
+            <Route path="/village/:villageId" element={ <VillageData />}/> 
+        </Routes>
+    </Router>
   );
 }
 
