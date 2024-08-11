@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import './village.scss';
 import ResourcePanel  from './ResourcePanel';
 
-const VillageData = () => {
+const Village = () => {
     const { villageId } = useParams();
     const [villageData, setVillageData] = useState({ resources: [], buildings: [], timestampNow: '' });
     const [resources, setResources] = useState({});
@@ -133,4 +133,4 @@ const VillageData = () => {
     );
     };
 
-export default VillageData;
+export default Village;

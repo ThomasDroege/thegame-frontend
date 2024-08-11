@@ -1,12 +1,12 @@
 import './main.scss';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import VillageData from './components/village/VillageData';
+import Village from './components/village/Village';
 
 function App() {
   return (
     <Router>
         <Routes>
-            <Route path="/village/:villageId" element={ <VillageData />}/> 
+            <Route path="/village/:villageId" element={ <Village />}/> 
         </Routes>
     </Router>
   );
