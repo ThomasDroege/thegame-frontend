@@ -1,171 +1,25 @@
 {
     "1": {
-      "name" : "city hall",
+      "name": "city hall",
       "levels": {
         "1": {
-          "buildingtime": 10,
-          "updatecosts": {
-            "stone": 10,
-            "wood": 10
-          }
-        },
-        "2": {
-          "buildingtime": 20,
-          "updatecosts": {
-            "stone": 20,
-            "wood": 20
-          }
-        },
-        "3": {
-          "buildingtime": 30,
-          "updatecosts": {
-            "stone": 30,
-            "wood": 30
-          }
-        },
-        "4": {
-          "buildingtime": 40,
-          "updatecosts": {
-            "stone": 40,
-            "wood": 40
-          }
-        },
-        "5": {
-          "buildingtime": 50,
-          "updatecosts": {
-            "stone": 50,
-            "wood": 50
-          }
-        },
-        "6": {
-          "buildingtime": 60,
-          "updatecosts": {
-            "stone": 60,
-            "wood": 60
-          }
-        },
-        "7": {
-          "buildingtime": 70,
-          "updatecosts": {
-            "stone": 70,
-            "wood": 70
-          }
-        },
-        "8": {
-          "buildingtime": 80,
-          "updatecosts": {
-            "stone": 80,
-            "wood": 80
-          }
-        },
-        "9": {
-          "buildingtime": 90,
-          "updatecosts": {
-            "stone": 90,
-            "wood": 90
-          }
-        },
-        "10": {
-          "buildingtime": 100,
-          "updatecosts": {
-            "stone": 100,
-            "wood": 100
-          }
-        },
-        "11": {
-          "buildingtime": 110,
-          "updatecosts": {
-            "stone": 110,
-            "wood": 110
-          }
-        },
-        "12": {
-          "buildingtime": 120,
-          "updatecosts": {
-            "stone": 120,
-            "wood": 120
-          }
-        },
-        "13": {
-          "buildingtime": 130,
-          "updatecosts": {
-            "stone": 130,
-            "wood": 130
-          }
-        },
-        "14": {
-          "buildingtime": 140,
-          "updatecosts": {
-            "stone": 140,
-            "wood": 140
-          }
-        },
-        "15": {
-          "buildingtime": 150,
-          "updatecosts": {
-            "stone": 150,
-            "wood": 150
-          }
-        },
-        "16": {
-          "buildingtime": 160,
-          "updatecosts": {
-            "stone": 160,
-            "wood": 160
-          }
-        },
-        "17": {
-          "buildingtime": 170,
-          "updatecosts": {
-            "stone": 170,
-            "wood": 170
-          }
-        },
-        "18": {
-          "buildingtime": 180,
-          "updatecosts": {
-            "stone": 180,
-            "wood": 180
-          }
-        },
-        "19": {
-          "buildingtime": 190,
-          "updatecosts": {
-            "stone": 190,
-            "wood": 190
-          }
-        },
-        "20": {
-          "buildingtime": 200,
-          "updatecosts": {
-            "stone": 200,
-            "wood": 200
-          }
-        }
-      }
-    },
-    "2": {
-      "name" : "mill",
-      "levels": {
-        "1" : {
           "buildingtime": 10,
           "updatecosts": {
             "stone": 10,
             "wood": 10
           },
-          "outcome": {
-            "1": {
-              "name": "food",
-              "value": "TODO"
-            }
+          "income": {
+            "buildingTimeModifier": 100
           }
-  
         },
         "2": {
           "buildingtime": 20,
           "updatecosts": {
             "stone": 20,
             "wood": 20
+          },
+          "income": {
+            "buildingTimeModifier": 96
           }
         },
         "3": {
@@ -173,6 +27,9 @@
           "updatecosts": {
             "stone": 30,
             "wood": 30
+          },
+          "income": {
+            "buildingTimeModifier": 92
           }
         },
         "4": {
@@ -180,6 +37,9 @@
           "updatecosts": {
             "stone": 40,
             "wood": 40
+          },
+          "income": {
+            "buildingTimeModifier": 88
           }
         },
         "5": {
@@ -187,6 +47,9 @@
           "updatecosts": {
             "stone": 50,
             "wood": 50
+          },
+          "income": {
+            "buildingTimeModifier": 84
           }
         },
         "6": {
@@ -194,6 +57,9 @@
           "updatecosts": {
             "stone": 60,
             "wood": 60
+          },
+          "income": {
+            "buildingTimeModifier": 80
           }
         },
         "7": {
@@ -201,6 +67,9 @@
           "updatecosts": {
             "stone": 70,
             "wood": 70
+          },
+          "income": {
+            "buildingTimeModifier": 76
           }
         },
         "8": {
@@ -208,6 +77,9 @@
           "updatecosts": {
             "stone": 80,
             "wood": 80
+          },
+          "income": {
+            "buildingTimeModifier": 72
           }
         },
         "9": {
@@ -215,6 +87,9 @@
           "updatecosts": {
             "stone": 90,
             "wood": 90
+          },
+          "income": {
+            "buildingTimeModifier": 68
           }
         },
         "10": {
@@ -222,6 +97,9 @@
           "updatecosts": {
             "stone": 100,
             "wood": 100
+          },
+          "income": {
+            "buildingTimeModifier": 64
           }
         },
         "11": {
@@ -229,6 +107,9 @@
           "updatecosts": {
             "stone": 110,
             "wood": 110
+          },
+          "income": {
+            "buildingTimeModifier": 60
           }
         },
         "12": {
@@ -236,6 +117,9 @@
           "updatecosts": {
             "stone": 120,
             "wood": 120
+          },
+          "income": {
+            "buildingTimeModifier": 56
           }
         },
         "13": {
@@ -243,6 +127,9 @@
           "updatecosts": {
             "stone": 130,
             "wood": 130
+          },
+          "income": {
+            "buildingTimeModifier": 52
           }
         },
         "14": {
@@ -250,6 +137,9 @@
           "updatecosts": {
             "stone": 140,
             "wood": 140
+          },
+          "income": {
+            "buildingTimeModifier": 48
           }
         },
         "15": {
@@ -257,6 +147,9 @@
           "updatecosts": {
             "stone": 150,
             "wood": 150
+          },
+          "income": {
+            "buildingTimeModifier": 44
           }
         },
         "16": {
@@ -264,6 +157,9 @@
           "updatecosts": {
             "stone": 160,
             "wood": 160
+          },
+          "income": {
+            "buildingTimeModifier": 40
           }
         },
         "17": {
@@ -271,6 +167,9 @@
           "updatecosts": {
             "stone": 170,
             "wood": 170
+          },
+          "income": {
+            "buildingTimeModifier": 36
           }
         },
         "18": {
@@ -278,6 +177,9 @@
           "updatecosts": {
             "stone": 180,
             "wood": 180
+          },
+          "income": {
+            "buildingTimeModifier": 32
           }
         },
         "19": {
@@ -285,6 +187,9 @@
           "updatecosts": {
             "stone": 190,
             "wood": 190
+          },
+          "income": {
+            "buildingTimeModifier": 28
           }
         },
         "20": {
@@ -292,443 +197,911 @@
           "updatecosts": {
             "stone": 200,
             "wood": 200
+          },
+          "income": {
+            "buildingTimeModifier": 20
           }
         }
       }
+    },  
+    "2": {
+        "name": "mill",
+        "levels": {
+        "1": {
+            "buildingtime": 10,
+            "updatecosts": {
+            "stone": 10,
+            "wood": 10
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 30
+            }
+        },
+        "2": {
+            "buildingtime": 20,
+            "updatecosts": {
+            "stone": 20,
+            "wood": 20
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 40
+            }
+        },
+        "3": {
+            "buildingtime": 30,
+            "updatecosts": {
+            "stone": 30,
+            "wood": 30
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 50
+            }
+        },
+        "4": {
+            "buildingtime": 40,
+            "updatecosts": {
+            "stone": 40,
+            "wood": 40
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 60
+            }
+        },
+        "5": {
+            "buildingtime": 50,
+            "updatecosts": {
+            "stone": 50,
+            "wood": 50
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 70
+            }
+        },
+        "6": {
+            "buildingtime": 60,
+            "updatecosts": {
+            "stone": 60,
+            "wood": 60
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 80
+            }
+        },
+        "7": {
+            "buildingtime": 70,
+            "updatecosts": {
+            "stone": 70,
+            "wood": 70
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 90
+            }
+        },
+        "8": {
+            "buildingtime": 80,
+            "updatecosts": {
+            "stone": 80,
+            "wood": 80
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 100
+            }
+        },
+        "9": {
+            "buildingtime": 90,
+            "updatecosts": {
+            "stone": 90,
+            "wood": 90
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 110
+            }
+        },
+        "10": {
+            "buildingtime": 100,
+            "updatecosts": {
+            "stone": 100,
+            "wood": 100
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 120
+            }
+        },
+        "11": {
+            "buildingtime": 110,
+            "updatecosts": {
+            "stone": 110,
+            "wood": 110
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 130
+            }
+        },
+        "12": {
+            "buildingtime": 120,
+            "updatecosts": {
+            "stone": 120,
+            "wood": 120
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 140
+            }
+        },
+        "13": {
+            "buildingtime": 130,
+            "updatecosts": {
+            "stone": 130,
+            "wood": 130
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 150
+            }
+        },
+        "14": {
+            "buildingtime": 140,
+            "updatecosts": {
+            "stone": 140,
+            "wood": 140
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 160
+            }
+        },
+        "15": {
+            "buildingtime": 150,
+            "updatecosts": {
+            "stone": 150,
+            "wood": 150
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 170
+            }
+        },
+        "16": {
+            "buildingtime": 160,
+            "updatecosts": {
+            "stone": 160,
+            "wood": 160
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 180
+            }
+        },
+        "17": {
+            "buildingtime": 170,
+            "updatecosts": {
+            "stone": 170,
+            "wood": 170
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 190
+            }
+        },
+        "18": {
+            "buildingtime": 180,
+            "updatecosts": {
+            "stone": 180,
+            "wood": 180
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 200
+            }
+        },
+        "19": {
+            "buildingtime": 190,
+            "updatecosts": {
+            "stone": 190,
+            "wood": 190
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 210
+            }
+        },
+        "20": {
+            "buildingtime": 200,
+            "updatecosts": {
+            "stone": 200,
+            "wood": 200
+            },
+            "income": {
+            "resourceTypeId": 1,          
+            "value": 220
+            }
+        }
+        }
     },
     "3": {
-      "name" : "lumberjack",
-      "levels": {
-        "1": {
-          "buildingtime": 10,
-          "updatecosts": {
-            "stone": 10,
-            "wood": 10
-          }
-        },
-        "2": {
-          "buildingtime": 20,
-          "updatecosts": {
-            "stone": 20,
-            "wood": 20
-          }
-        },
-        "3": {
-          "buildingtime": 30,
-          "updatecosts": {
-            "stone": 30,
-            "wood": 30
-          }
-        },
-        "4": {
-          "buildingtime": 40,
-          "updatecosts": {
-            "stone": 40,
-            "wood": 40
-          }
-        },
-        "5": {
-          "buildingtime": 50,
-          "updatecosts": {
-            "stone": 50,
-            "wood": 50
-          }
-        },
-        "6": {
-          "buildingtime": 60,
-          "updatecosts": {
-            "stone": 60,
-            "wood": 60
-          }
-        },
-        "7": {
-          "buildingtime": 70,
-          "updatecosts": {
-            "stone": 70,
-            "wood": 70
-          }
-        },
-        "8": {
-          "buildingtime": 80,
-          "updatecosts": {
-            "stone": 80,
-            "wood": 80
-          }
-        },
-        "9": {
-          "buildingtime": 90,
-          "updatecosts": {
-            "stone": 90,
-            "wood": 90
-          }
-        },
-        "10": {
-          "buildingtime": 100,
-          "updatecosts": {
-            "stone": 100,
-            "wood": 100
-          }
-        },
-        "11": {
-          "buildingtime": 110,
-          "updatecosts": {
-            "stone": 110,
-            "wood": 110
-          }
-        },
-        "12": {
-          "buildingtime": 120,
-          "updatecosts": {
-            "stone": 120,
-            "wood": 120
-          }
-        },
-        "13": {
-          "buildingtime": 130,
-          "updatecosts": {
-            "stone": 130,
-            "wood": 130
-          }
-        },
-        "14": {
-          "buildingtime": 140,
-          "updatecosts": {
-            "stone": 140,
-            "wood": 140
-          }
-        },
-        "15": {
-          "buildingtime": 150,
-          "updatecosts": {
-            "stone": 150,
-            "wood": 150
-          }
-        },
-        "16": {
-          "buildingtime": 160,
-          "updatecosts": {
-            "stone": 160,
-            "wood": 160
-          }
-        },
-        "17": {
-          "buildingtime": 170,
-          "updatecosts": {
-            "stone": 170,
-            "wood": 170
-          }
-        },
-        "18": {
-          "buildingtime": 180,
-          "updatecosts": {
-            "stone": 180,
-            "wood": 180
-          }
-        },
-        "19": {
-          "buildingtime": 190,
-          "updatecosts": {
-            "stone": 190,
-            "wood": 190
-          }
-        },
-        "20": {
-          "buildingtime": 200,
-          "updatecosts": {
-            "stone": 200,
-            "wood": 200
+        "name": "lumberjack",
+        "levels": {
+          "1": {
+            "buildingtime": 10,
+            "updatecosts": {
+              "stone": 10,
+              "wood": 10
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 30
+            }
+          },
+          "2": {
+            "buildingtime": 20,
+            "updatecosts": {
+              "stone": 20,
+              "wood": 20
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 40
+            }
+          },
+          "3": {
+            "buildingtime": 30,
+            "updatecosts": {
+              "stone": 30,
+              "wood": 30
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 50
+            }
+          },
+          "4": {
+            "buildingtime": 40,
+            "updatecosts": {
+              "stone": 40,
+              "wood": 40
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 60
+            }
+          },
+          "5": {
+            "buildingtime": 50,
+            "updatecosts": {
+              "stone": 50,
+              "wood": 50
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 70
+            }
+          },
+          "6": {
+            "buildingtime": 60,
+            "updatecosts": {
+              "stone": 60,
+              "wood": 60
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 80
+            }
+          },
+          "7": {
+            "buildingtime": 70,
+            "updatecosts": {
+              "stone": 70,
+              "wood": 70
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 90
+            }
+          },
+          "8": {
+            "buildingtime": 80,
+            "updatecosts": {
+              "stone": 80,
+              "wood": 80
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 100
+            }
+          },
+          "9": {
+            "buildingtime": 90,
+            "updatecosts": {
+              "stone": 90,
+              "wood": 90
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 110
+            }
+          },
+          "10": {
+            "buildingtime": 100,
+            "updatecosts": {
+              "stone": 100,
+              "wood": 100
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 120
+            }
+          },
+          "11": {
+            "buildingtime": 110,
+            "updatecosts": {
+              "stone": 110,
+              "wood": 110
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 130
+            }
+          },
+          "12": {
+            "buildingtime": 120,
+            "updatecosts": {
+              "stone": 120,
+              "wood": 120
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 140
+            }
+          },
+          "13": {
+            "buildingtime": 130,
+            "updatecosts": {
+              "stone": 130,
+              "wood": 130
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 150
+            }
+          },
+          "14": {
+            "buildingtime": 140,
+            "updatecosts": {
+              "stone": 140,
+              "wood": 140
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 160
+            }
+          },
+          "15": {
+            "buildingtime": 150,
+            "updatecosts": {
+              "stone": 150,
+              "wood": 150
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 170
+            }
+          },
+          "16": {
+            "buildingtime": 160,
+            "updatecosts": {
+              "stone": 160,
+              "wood": 160
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 180
+            }
+          },
+          "17": {
+            "buildingtime": 170,
+            "updatecosts": {
+              "stone": 170,
+              "wood": 170
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 190
+            }
+          },
+          "18": {
+            "buildingtime": 180,
+            "updatecosts": {
+              "stone": 180,
+              "wood": 180
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 200
+            }
+          },
+          "19": {
+            "buildingtime": 190,
+            "updatecosts": {
+              "stone": 190,
+              "wood": 190
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 210
+            }
+          },
+          "20": {
+            "buildingtime": 200,
+            "updatecosts": {
+              "stone": 200,
+              "wood": 200
+            },
+            "income": {
+            "resourceTypeId": 2,          
+            "value": 220
+            }
           }
         }
-      }
     },
     "4": {
-      "name" : "mason",
-      "levels": {
+        "name": "mason",
+        "levels": {
         "1": {
-          "buildingtime": 10,
-          "updatecosts": {
+            "buildingtime": 10,
+            "updatecosts": {
             "stone": 10,
             "wood": 10
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 30
+            }
         },
         "2": {
-          "buildingtime": 20,
-          "updatecosts": {
+            "buildingtime": 20,
+            "updatecosts": {
             "stone": 20,
             "wood": 20
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 40
+            }
         },
         "3": {
-          "buildingtime": 30,
-          "updatecosts": {
+            "buildingtime": 30,
+            "updatecosts": {
             "stone": 30,
             "wood": 30
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 50
+            }
         },
         "4": {
-          "buildingtime": 40,
-          "updatecosts": {
+            "buildingtime": 40,
+            "updatecosts": {
             "stone": 40,
             "wood": 40
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 60
+            }
         },
         "5": {
-          "buildingtime": 50,
-          "updatecosts": {
+            "buildingtime": 50,
+            "updatecosts": {
             "stone": 50,
             "wood": 50
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 70
+            }
         },
         "6": {
-          "buildingtime": 60,
-          "updatecosts": {
+            "buildingtime": 60,
+            "updatecosts": {
             "stone": 60,
             "wood": 60
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 80
+            }
         },
         "7": {
-          "buildingtime": 70,
-          "updatecosts": {
+            "buildingtime": 70,
+            "updatecosts": {
             "stone": 70,
             "wood": 70
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 90
+            }
         },
         "8": {
-          "buildingtime": 80,
-          "updatecosts": {
+            "buildingtime": 80,
+            "updatecosts": {
             "stone": 80,
             "wood": 80
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 100
+            }
         },
         "9": {
-          "buildingtime": 90,
-          "updatecosts": {
+            "buildingtime": 90,
+            "updatecosts": {
             "stone": 90,
             "wood": 90
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 110
+            }
         },
         "10": {
-          "buildingtime": 100,
-          "updatecosts": {
+            "buildingtime": 100,
+            "updatecosts": {
             "stone": 100,
             "wood": 100
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 120
+            }
         },
         "11": {
-          "buildingtime": 110,
-          "updatecosts": {
+            "buildingtime": 110,
+            "updatecosts": {
             "stone": 110,
             "wood": 110
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 130
+            }
         },
         "12": {
-          "buildingtime": 120,
-          "updatecosts": {
+            "buildingtime": 120,
+            "updatecosts": {
             "stone": 120,
             "wood": 120
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 140
+            }
         },
         "13": {
-          "buildingtime": 130,
-          "updatecosts": {
+            "buildingtime": 130,
+            "updatecosts": {
             "stone": 130,
             "wood": 130
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 150
+            }
         },
         "14": {
-          "buildingtime": 140,
-          "updatecosts": {
+            "buildingtime": 140,
+            "updatecosts": {
             "stone": 140,
             "wood": 140
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 160
+            }
         },
         "15": {
-          "buildingtime": 150,
-          "updatecosts": {
+            "buildingtime": 150,
+            "updatecosts": {
             "stone": 150,
             "wood": 150
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 170
+            }
         },
         "16": {
-          "buildingtime": 160,
-          "updatecosts": {
+            "buildingtime": 160,
+            "updatecosts": {
             "stone": 160,
             "wood": 160
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 180
+            }
         },
         "17": {
-          "buildingtime": 170,
-          "updatecosts": {
+            "buildingtime": 170,
+            "updatecosts": {
             "stone": 170,
             "wood": 170
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 190
+            }
         },
         "18": {
-          "buildingtime": 180,
-          "updatecosts": {
+            "buildingtime": 180,
+            "updatecosts": {
             "stone": 180,
             "wood": 180
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 200
+            }
         },
         "19": {
-          "buildingtime": 190,
-          "updatecosts": {
+            "buildingtime": 190,
+            "updatecosts": {
             "stone": 190,
             "wood": 190
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 210
+            }
         },
         "20": {
-          "buildingtime": 200,
-          "updatecosts": {
+            "buildingtime": 200,
+            "updatecosts": {
             "stone": 200,
             "wood": 200
-          }
+            },
+            "income": {
+            "resourceTypeId": 3,          
+            "value": 220
+            }
         }
-      }
-    },
+        }
+    },  
     "5": {
-      "name" : "iron mine",
-      "levels": {
+        "name": "iron mine",
+        "levels": {
         "1": {
-          "buildingtime": 10,
-          "updatecosts": {
+            "buildingtime": 10,
+            "updatecosts": {
             "stone": 10,
             "wood": 10
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 30
+            }
         },
         "2": {
-          "buildingtime": 20,
-          "updatecosts": {
+            "buildingtime": 20,
+            "updatecosts": {
             "stone": 20,
             "wood": 20
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 40
+            }
         },
         "3": {
-          "buildingtime": 30,
-          "updatecosts": {
+            "buildingtime": 30,
+            "updatecosts": {
             "stone": 30,
             "wood": 30
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 50
+            }
         },
         "4": {
-          "buildingtime": 40,
-          "updatecosts": {
+            "buildingtime": 40,
+            "updatecosts": {
             "stone": 40,
             "wood": 40
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 60
+            }
         },
         "5": {
-          "buildingtime": 50,
-          "updatecosts": {
+            "buildingtime": 50,
+            "updatecosts": {
             "stone": 50,
             "wood": 50
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 70
+            }
         },
         "6": {
-          "buildingtime": 60,
-          "updatecosts": {
+            "buildingtime": 60,
+            "updatecosts": {
             "stone": 60,
             "wood": 60
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 80
+            }
         },
         "7": {
-          "buildingtime": 70,
-          "updatecosts": {
+            "buildingtime": 70,
+            "updatecosts": {
             "stone": 70,
             "wood": 70
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 90
+            }
         },
         "8": {
-          "buildingtime": 80,
-          "updatecosts": {
+            "buildingtime": 80,
+            "updatecosts": {
             "stone": 80,
             "wood": 80
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 100
+            }
         },
         "9": {
-          "buildingtime": 90,
-          "updatecosts": {
+            "buildingtime": 90,
+            "updatecosts": {
             "stone": 90,
             "wood": 90
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 110
+            }
         },
         "10": {
-          "buildingtime": 100,
-          "updatecosts": {
+            "buildingtime": 100,
+            "updatecosts": {
             "stone": 100,
             "wood": 100
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 120
+            }
         },
         "11": {
-          "buildingtime": 110,
-          "updatecosts": {
+            "buildingtime": 110,
+            "updatecosts": {
             "stone": 110,
             "wood": 110
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 130
+            }
         },
         "12": {
-          "buildingtime": 120,
-          "updatecosts": {
+            "buildingtime": 120,
+            "updatecosts": {
             "stone": 120,
             "wood": 120
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 140
+            }
         },
         "13": {
-          "buildingtime": 130,
-          "updatecosts": {
+            "buildingtime": 130,
+            "updatecosts": {
             "stone": 130,
             "wood": 130
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 150
+            }
         },
         "14": {
-          "buildingtime": 140,
-          "updatecosts": {
+            "buildingtime": 140,
+            "updatecosts": {
             "stone": 140,
             "wood": 140
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 160
+            }
         },
         "15": {
-          "buildingtime": 150,
-          "updatecosts": {
+            "buildingtime": 150,
+            "updatecosts": {
             "stone": 150,
             "wood": 150
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 170
+            }
         },
         "16": {
-          "buildingtime": 160,
-          "updatecosts": {
+            "buildingtime": 160,
+            "updatecosts": {
             "stone": 160,
             "wood": 160
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 180
+            }
         },
         "17": {
-          "buildingtime": 170,
-          "updatecosts": {
+            "buildingtime": 170,
+            "updatecosts": {
             "stone": 170,
             "wood": 170
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 190
+            }
         },
         "18": {
-          "buildingtime": 180,
-          "updatecosts": {
+            "buildingtime": 180,
+            "updatecosts": {
             "stone": 180,
             "wood": 180
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 200
+            }
         },
         "19": {
-          "buildingtime": 190,
-          "updatecosts": {
+            "buildingtime": 190,
+            "updatecosts": {
             "stone": 190,
             "wood": 190
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 210
+            }
         },
         "20": {
-          "buildingtime": 200,
-          "updatecosts": {
+            "buildingtime": 200,
+            "updatecosts": {
             "stone": 200,
             "wood": 200
-          }
+            },
+            "income": {
+            "resourceTypeId": 4,          
+            "value": 220
+            }
         }
-      }
-    }
-  }
+        }
+    }           
+}

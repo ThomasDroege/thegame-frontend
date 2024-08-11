@@ -1,8 +1,20 @@
 .resourcePanel  {
     display: flex;
     align-items: center;
-}
 
-.resourceIcon {
-    padding-left: 10px;
+    .resourceContainer {
+        display: flex;
+        align-items: center;
+        /* Optional: justify-content: space-between; um Platz zwischen den Items zu verteilen */
+        .resourceVal {
+            flex: 1; /* Lässt diesen Block den verfügbaren Platz einnehmen */
+            .resourceIncome {
+                color: rgb(47, 163, 47);
+            }
+        }
+        
+        .resourceIcon {
+            margin-left: 1rem; /* Abstand nach links, falls benötigt */
+        }  
+    }
 }

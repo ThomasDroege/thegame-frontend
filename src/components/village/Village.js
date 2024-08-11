@@ -10,6 +10,9 @@ const Village = () => {
     const [resources, setResources] = useState({});
     const [buildingsJsonData, setBuildingsJsonData] = useState(null); 
 
+    const [buildingTimer, setBuildingTimer] = useState({ time: 0, buildingTypeId: null });
+    const [isBuildingTimerActive, setIsBuildingTimerActive] = useState(false);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -18,7 +21,6 @@ const Village = () => {
     }, []);
 
     useEffect(() => {
-        console.log(villageData)
         const interval = setInterval(() => {
         setResources(prevResources => {
             const updatedResources = { ...prevResources };
@@ -34,6 +36,27 @@ const Village = () => {
     }, [villageData.resources]);
 
     useEffect(() => {
+        if (isBuildingTimerActive && buildingTimer.time >= 0) {
+            const interval = setInterval(() => {
+                setBuildingTimer(prevState => {
+                    if (prevState.time > 0) {
+                        console.log("TIMER", prevState.time);
+                        return { ...prevState, time: prevState.time - 1 };
+                    } else {
+                        clearInterval(interval); 
+                        increaseBuildingLvl(buildingTimer.buildingTypeId); 
+                        setIsBuildingTimerActive(false);
+                        return { ...prevState, time: 0 };
+                    }
+                });
+            }, 1000);
+    
+            return () => clearInterval(interval);
+        }
+    }, [isBuildingTimerActive, buildingTimer]);
+
+    useEffect(() => {
+       
         fetch('/buildings.json')
             .then(response => {
                 if (!response.ok) {
@@ -42,7 +65,6 @@ const Village = () => {
                 return response.json();
             })
             .then(data => {
-                console.log("respose", data)
                 setBuildingsJsonData(data);
             })
             .catch(error => console.error('Error loading the buildings.json file:', error));
@@ -71,24 +93,42 @@ const Village = () => {
         });
     }
    
-    function increaseBuildingLvl(buildingTypeId) {
-        console.log("villageData", villageData)
+    function initiateBuildingUpgrade(buildingTypeId, buildingLevel) {
         const formData = new FormData();
         formData.append('buildingTypeId', buildingTypeId);
         formData.append('villageId', villageId);
-        fetch('http://localhost:8080/village/increaseBuildingLevel', {
+        fetch('http://localhost:8080/village/initiateBuildingUpgrade', {
             method: 'POST',
             body: formData
         })
 
         .then(response => {
-            console.log("Success: ", response)
             fetchVillageData()
+            setBuildingTimer({time: buildingsJsonData[buildingTypeId]["levels"][buildingLevel + 1]["buildingtime"], buildingTypeId: buildingTypeId})
+            setIsBuildingTimerActive(true)
         })
         .catch(error => {
             //ToDo: es sollte noch abgefangen werden, wenn das Max Level erreicht ist. Max Level ist damit definiert, dass in der Buildings.json kein weiteres Level definiert ist.
             // Disablen des Buttons und es sollte auch ein 500er abgefangen werden, wenn der RestEndpunkt aufgerufen wird und das Level nicht definiert ist (Conflict: Max Level reached)
-            console.error('Error:', error);
+            console.error('Error while initiating Building Upgrade:', error);
+        });
+    }
+
+    function increaseBuildingLvl(buildingTypeId) {
+        const formData = new FormData();
+        formData.append('buildingTypeId', buildingTypeId);
+        formData.append('villageId', villageId);
+        fetch('http://localhost:8080/village/increaseBuildingLvl', {
+            method: 'POST',
+            body: formData
+        })
+
+        .then(() => {
+            console.log("Building Updated")
+            fetchVillageData()
+        })
+        .catch(error => {
+            console.error('Building Update Error:', error);
         });
     }
 
@@ -100,10 +140,10 @@ const Village = () => {
         return <div>Error: {error.message}</div>;
     }
 
-    return (
+    return (       
         <div>
             <div className="village">
-                <ResourcePanel resources={resources}/>
+                <ResourcePanel currentResources={resources} resourcesFromVillageData={villageData.resources}/>
                 <div className="container">
                     <div className="row align-items-start pb-3">
                         {villageData.buildings.map((building, index) => (   
@@ -118,7 +158,7 @@ const Village = () => {
                                                 <p className="building-outcome">ToDo: Outcome</p>
                                                 <p className="building-level">Level: {building.buildingLevel}</p>
                                                 <p className="building-update-costs">ToDo: Update Costs</p>
-                                                <button onClick={()  => increaseBuildingLvl(building.buildingTypeId)}>Increase Level</button>
+                                                <button onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}>Increase Level</button>
                                             </div>
                                         </div>
                                     </div>
