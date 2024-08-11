@@ -5,16 +5,16 @@
     .resourceContainer {
         display: flex;
         align-items: center;
-        /* Optional: justify-content: space-between; um Platz zwischen den Items zu verteilen */
+        
         .resourceVal {
-            flex: 1; /* Lässt diesen Block den verfügbaren Platz einnehmen */
+            flex: 1; 
             .resourceIncome {
                 color: rgb(47, 163, 47);
             }
         }
         
         .resourceIcon {
-            margin-left: 1rem; /* Abstand nach links, falls benötigt */
+            margin-right: 1rem; 
         }  
     }
 }
