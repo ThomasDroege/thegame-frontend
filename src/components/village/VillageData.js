@@ -2,21 +2,57 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './village.scss';
+import ResourcePanel  from './ResourcePanel';
 
 const VillageData = () => {
     const { villageId } = useParams();
-    const [data, setData] = useState({ resources: [], buildings: [], timestampNow: '' });
+    const [villageData, setVillageData] = useState({ resources: [], buildings: [], timestampNow: '' });
     const [resources, setResources] = useState({});
-    const [buildingsdata, setBuildingsData] = useState(null); 
+    const [buildingsJsonData, setBuildingsJsonData] = useState(null); 
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        fetchVillageData()
+    }, []);
+
+    useEffect(() => {
+        console.log(villageData)
+        const interval = setInterval(() => {
+        setResources(prevResources => {
+            const updatedResources = { ...prevResources };
+            villageData.resources.forEach(resource => {
+            const resourceName = resource.resourceName.toLowerCase();    
+            updatedResources[resourceName] += resource.resourceIncome/3600;
+            });
+            return updatedResources;
+        });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [villageData.resources]);
+
+    useEffect(() => {
+        fetch('/buildings.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("respose", data)
+                setBuildingsJsonData(data);
+            })
+            .catch(error => console.error('Error loading the buildings.json file:', error));
+    }, []);
+
+    function fetchVillageData() {
         fetch(`http://localhost:8080/village/${villageId}/data`)
         .then(response => response.json())
         .then(data => {
-            setData(data);
+            setVillageData(data);
             const initialResources = {};
             const now = new Date();
             data.resources.forEach(resource => {
@@ -33,40 +69,30 @@ const VillageData = () => {
             setError(error);
             setLoading(false);
         });
-    }, []);
+    }
+   
+    function increaseBuildingLvl(buildingTypeId) {
+        console.log("villageData", villageData)
+        const formData = new FormData();
+        formData.append('buildingTypeId', buildingTypeId);
+        formData.append('villageId', villageId);
+        fetch('http://localhost:8080/village/increaseBuildingLevel', {
+            method: 'POST',
+            body: formData
+        })
 
-    useEffect(() => {
-        console.log(data)
-        const interval = setInterval(() => {
-        setResources(prevResources => {
-            const updatedResources = { ...prevResources };
-            data.resources.forEach(resource => {
-            const resourceName = resource.resourceName.toLowerCase();    
-            updatedResources[resourceName] += resource.resourceIncome/3600;
-            });
-            return updatedResources;
+        .then(response => {
+            console.log("Success: ", response)
+            fetchVillageData()
+        })
+        .catch(error => {
+            //ToDo: es sollte noch abgefangen werden, wenn das Max Level erreicht ist. Max Level ist damit definiert, dass in der Buildings.json kein weiteres Level definiert ist.
+            // Disablen des Buttons und es sollte auch ein 500er abgefangen werden, wenn der RestEndpunkt aufgerufen wird und das Level nicht definiert ist (Conflict: Max Level reached)
+            console.error('Error:', error);
         });
-        }, 1000);
+    }
 
-        return () => clearInterval(interval);
-    }, [data.resources]);
-
-    useEffect(() => {
-        fetch('/buildings.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("respose", data)
-                setBuildingsData(data);
-            })
-            .catch(error => console.error('Error loading the buildings.json file:', error));
-    }, []);
-
-    if (loading && !buildingsdata) {
+    if (loading && !buildingsJsonData) {
         return <div>Loading...</div>;
     }
 
@@ -77,62 +103,10 @@ const VillageData = () => {
     return (
         <div>
             <div className="village">
-                <div className="container">
-                    <div className="resourcePanel row pb-3 pt-3">
-                        <div className="col-3">
-                            <div className="card">
-                                <div className="row">
-                                    <div className="col-6 resourceVal">
-                                        <div id="foodValId" style={{marginLeft: '1rem'}}>{Math.floor(resources.food*100)/100}</div>
-                                    </div>
-                                    <div className="col-6 resourceIcon">
-                                        Food
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="col-3">
-                            <div className="card">
-                                <div className="row">
-                                    <div className="col-6 resourceVal">
-                                        <div id="woodValId" style={{marginLeft: '1rem'}}>{Math.floor(resources.wood*100)/100}</div>
-                                    </div>
-                                    <div className="col-6 resourceIcon">
-                                        Wood
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-3">
-                            <div className="card">
-                                <div className="row">
-                                    <div className="col-6 resourceVal">
-                                        <div id="stoneValId" style={{marginLeft: '1rem'}}>{Math.floor(resources.stone*100)/100}</div>
-                                    </div>
-                                    <div className="col-6 resourceIcon">
-                                        Stone
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-3">
-                            <div className="card">
-                                <div className="row">
-                                    <div className="col-6 resourceVal">
-                                        <div id="ironValId" style={{marginLeft: '1rem'}}>{Math.floor(resources.iron*100)/100}</div>
-                                    </div>
-                                    <div className="col-6 resourceIcon">
-                                        Iron
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ResourcePanel resources={resources}/>
                 <div className="container">
                     <div className="row align-items-start pb-3">
-                        {data.buildings.map((building, index) => (   
+                        {villageData.buildings.map((building, index) => (   
                             <div className="col-4 pb-4" key={index}>
                                 <div className="card text-center">
                                     <div className="building">
@@ -144,6 +118,7 @@ const VillageData = () => {
                                                 <p className="building-outcome">ToDo: Outcome</p>
                                                 <p className="building-level">Level: {building.buildingLevel}</p>
                                                 <p className="building-update-costs">ToDo: Update Costs</p>
+                                                <button onClick={()  => increaseBuildingLvl(building.buildingTypeId)}>Increase Level</button>
                                             </div>
                                         </div>
                                     </div>
@@ -151,7 +126,7 @@ const VillageData = () => {
                             </div>
                             ))}         
                     </div>
-                    <p>Current Timestamp: {data.timestampNow}</p>
+                    <p>Current Timestamp: {villageData.timestampNow}</p>
                 </div>
             </div>
         </div>
