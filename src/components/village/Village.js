@@ -162,10 +162,7 @@ const Village = () => {
                                                 <p className="building-level">Level: {building.buildingLevel}</p>
                                                 <p className="building-update-costs">ToDo: Update Costs</p>
                                                 <button onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}
-                                                     disabled={
-                                                        activeBuildingId !== null &&
-                                                        activeBuildingId !== building.buildingTypeId
-                                                    }>
+                                                     disabled={isBuildingTimerActive && buildingTimer.time >= 0}>
                                                     {activeBuildingId === building.buildingTypeId  && isBuildingTimerActive && buildingTimer.time >= 0 ? `${buildingTimer.time}s` : "Increase Level"}
                                                 </button>
                                             </div>
