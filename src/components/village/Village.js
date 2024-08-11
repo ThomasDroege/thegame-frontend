@@ -10,6 +10,7 @@ const Village = () => {
     const [resources, setResources] = useState({});
     const [buildingsJsonData, setBuildingsJsonData] = useState(null); 
 
+    const [activeBuildingId, setActiveBuildingId] = useState(null);
     const [buildingTimer, setBuildingTimer] = useState({ time: 0, buildingTypeId: null });
     const [isBuildingTimerActive, setIsBuildingTimerActive] = useState(false);
 
@@ -40,12 +41,12 @@ const Village = () => {
             const interval = setInterval(() => {
                 setBuildingTimer(prevState => {
                     if (prevState.time > 0) {
-                        console.log("TIMER", prevState.time);
                         return { ...prevState, time: prevState.time - 1 };
                     } else {
                         clearInterval(interval); 
                         increaseBuildingLvl(buildingTimer.buildingTypeId); 
                         setIsBuildingTimerActive(false);
+                        setActiveBuildingId(null);
                         return { ...prevState, time: 0 };
                     }
                 });
@@ -94,6 +95,7 @@ const Village = () => {
     }
    
     function initiateBuildingUpgrade(buildingTypeId, buildingLevel) {
+        
         const formData = new FormData();
         formData.append('buildingTypeId', buildingTypeId);
         formData.append('villageId', villageId);
@@ -104,6 +106,7 @@ const Village = () => {
 
         .then(response => {
             fetchVillageData()
+            setActiveBuildingId(buildingTypeId)
             setBuildingTimer({time: buildingsJsonData[buildingTypeId]["levels"][buildingLevel + 1]["buildingtime"], buildingTypeId: buildingTypeId})
             setIsBuildingTimerActive(true)
         })
@@ -158,7 +161,13 @@ const Village = () => {
                                                 <p className="building-outcome">ToDo: Outcome</p>
                                                 <p className="building-level">Level: {building.buildingLevel}</p>
                                                 <p className="building-update-costs">ToDo: Update Costs</p>
-                                                <button onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}>Increase Level</button>
+                                                <button onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}
+                                                     disabled={
+                                                        activeBuildingId !== null &&
+                                                        activeBuildingId !== building.buildingTypeId
+                                                    }>
+                                                    {activeBuildingId === building.buildingTypeId  && isBuildingTimerActive && buildingTimer.time >= 0 ? `${buildingTimer.time}s` : "Increase Level"}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
