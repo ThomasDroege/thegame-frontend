@@ -19,6 +19,7 @@ const Village = () => {
 
     useEffect(() => {
         fetchVillageData()
+        fetchBuildingTimer()
     }, []);
 
     useEffect(() => {
@@ -40,9 +41,11 @@ const Village = () => {
         if (isBuildingTimerActive && buildingTimer.time >= 0) {
             const interval = setInterval(() => {
                 setBuildingTimer(prevState => {
+                    console.log("PRV.time", prevState.time)
                     if (prevState.time > 0) {
                         return { ...prevState, time: prevState.time - 1 };
                     } else {
+                        console.log("TEST")
                         clearInterval(interval); 
                         increaseBuildingLvl(buildingTimer.buildingTypeId); 
                         setIsBuildingTimerActive(false);
@@ -57,7 +60,6 @@ const Village = () => {
     }, [isBuildingTimerActive, buildingTimer]);
 
     useEffect(() => {
-       
         fetch('/buildings.json')
             .then(response => {
                 if (!response.ok) {
@@ -89,6 +91,26 @@ const Village = () => {
         })
         .catch(error => {
             console.error('Error fetching village data:', error);
+            setError(error);
+            setLoading(false);
+        });
+    }
+
+    function fetchBuildingTimer() {
+        fetch(`http://localhost:8080/timer/${villageId}/buildings`)
+        .then(response => response.json())
+        .then(data => {
+            const buildingTypeId = data['timer'][0]['objectTypeId']
+            const updateTimeFromResponse =  data['timer'][0]['updateTime']
+            const diffTimes = Math.floor((new Date(updateTimeFromResponse) - new Date())/ 1000)
+            if(diffTimes > 0) {
+                setActiveBuildingId(buildingTypeId)
+                setBuildingTimer({time: diffTimes, buildingTypeId: buildingTypeId})
+                setIsBuildingTimerActive(true)
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching building timer:', error);
             setError(error);
             setLoading(false);
         });
