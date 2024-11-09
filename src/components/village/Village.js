@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './village.scss';
+import './building.scss';
 import ResourcePanel  from './ResourcePanel';
 
 const Village = () => {
@@ -80,10 +81,14 @@ const Village = () => {
             setVillageData(data);
             const initialResources = {};
             const now = new Date();
-            data.resources.forEach(resource => {
+            data.resources.forEach(resource => { 
                 const givenTime = new Date(resource.updateTime);
-                const hoursSinceLastUpdate = (now-givenTime)/1000/3600;       
+                const hoursSinceLastUpdate = (now-givenTime)/1000/3600;
+                if(initialResources[resource.resourceName.toLowerCase()]){
+                    initialResources[resource.resourceName.toLowerCase()] = initialResources[resource.resourceName.toLowerCase()] + resource.resourceAtUpdateTime + hoursSinceLastUpdate*resource.resourceIncome;    
+                } else {
                 initialResources[resource.resourceName.toLowerCase()] = resource.resourceAtUpdateTime + hoursSinceLastUpdate*resource.resourceIncome;
+                }
             }, [villageId]);
             setResources(initialResources);
             
@@ -183,7 +188,7 @@ const Village = () => {
                                                 <p className="building-outcome">ToDo: Outcome</p>
                                                 <p className="building-level">Level: {building.buildingLevel}</p>
                                                 <p className="building-update-costs">ToDo: Update Costs</p>
-                                                <button onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}
+                                                <button type="button" className="primary-button" onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}
                                                      disabled={isBuildingTimerActive && buildingTimer.time >= 0}>
                                                     {activeBuildingId === building.buildingTypeId  && isBuildingTimerActive && buildingTimer.time >= 0 ? `${buildingTimer.time}s` : "Increase Level"}
                                                 </button>
