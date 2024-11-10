@@ -11,6 +11,7 @@ const Village = () => {
     const [resources, setResources] = useState({});
     const [buildingsJsonData, setBuildingsJsonData] = useState(null); 
 
+    // will be needed for showing the actual increasing building (increase button)
     const [activeBuildingId, setActiveBuildingId] = useState(null);
     const [buildingTimer, setBuildingTimer] = useState({ time: 0, buildingTypeId: null });
     const [isBuildingTimerActive, setIsBuildingTimerActive] = useState(false);
@@ -48,7 +49,9 @@ const Village = () => {
                     } else {
                         console.log("TEST")
                         clearInterval(interval); 
-                        increaseBuildingLvl(buildingTimer.buildingTypeId); 
+                        
+                        // TODO: Building Lvl wird sofort hochgesetzt mit Zukunfts Zeitstempel
+                        //increaseBuildingLvl(buildingTimer.buildingTypeId); 
                         setIsBuildingTimerActive(false);
                         setActiveBuildingId(null);
                         return { ...prevState, time: 0 };
@@ -79,8 +82,21 @@ const Village = () => {
         .then(response => response.json())
         .then(data => {
             setVillageData(data);
-            const initialResources = {};
             const now = new Date();
+            console.log("VILLAGE DATE:", data)
+            
+            data.buildings.forEach(building => {
+                const givenTime = new Date(building.updateTime);
+                const secondsTillNextUpdate = Math.floor((givenTime -now)/1000);
+
+                if(secondsTillNextUpdate > 0) {
+                    setBuildingTimer(prevState => ({ ...prevState, time: secondsTillNextUpdate, buildingTypeId: building.buildingTypeId }));
+                    setActiveBuildingId(building.buildingTypeId)
+                    setIsBuildingTimerActive(true)
+                }
+             
+            })
+            const initialResources = {};
             data.resources.forEach(resource => { 
                 const givenTime = new Date(resource.updateTime);
                 const hoursSinceLastUpdate = (now-givenTime)/1000/3600;
@@ -144,6 +160,7 @@ const Village = () => {
         });
     }
 
+    //TODO löschen (sowohl FE als auch Backend [zumindest der Controller, intern wird das Lvl noch hochgesetzt])
     function increaseBuildingLvl(buildingTypeId) {
         const formData = new FormData();
         formData.append('buildingTypeId', buildingTypeId);

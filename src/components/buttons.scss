@@ -6,8 +6,17 @@
     border: none;
     color: #fff;
 
+    &:hover {
+        background-color: #eeefeb;
+        cursor: pointer;
+    }
+
+    //TODO: passendes Design noch finden
+    &:disabled {
+        cursor: auto;
+        background-color: #eeefeb;
+        
+    }
+
 }
 
-.primary-button:hover {
-   background-color: #eeefeb;
-}
