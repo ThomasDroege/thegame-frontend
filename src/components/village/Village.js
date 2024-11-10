@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './village.scss';
-import './building.scss';
 import ResourcePanel  from './ResourcePanel';
+import Building from './buildings/Building';
 
 const Village = () => {
     const { villageId } = useParams();
@@ -21,7 +21,7 @@ const Village = () => {
 
     useEffect(() => {
         fetchVillageData()
-        fetchBuildingTimer()
+        //fetchBuildingTimer()
     }, []);
 
     useEffect(() => {
@@ -83,8 +83,8 @@ const Village = () => {
         .then(data => {
             setVillageData(data);
             const now = new Date();
-            console.log("VILLAGE DATE:", data)
-            
+
+            // Set BuildingTimer for active Building Level Increasing
             data.buildings.forEach(building => {
                 const givenTime = new Date(building.updateTime);
                 const secondsTillNextUpdate = Math.floor((givenTime -now)/1000);
@@ -93,9 +93,9 @@ const Village = () => {
                     setBuildingTimer(prevState => ({ ...prevState, time: secondsTillNextUpdate, buildingTypeId: building.buildingTypeId }));
                     setActiveBuildingId(building.buildingTypeId)
                     setIsBuildingTimerActive(true)
-                }
-             
+                } 
             })
+
             const initialResources = {};
             data.resources.forEach(resource => { 
                 const givenTime = new Date(resource.updateTime);
@@ -117,26 +117,6 @@ const Village = () => {
         });
     }
 
-    function fetchBuildingTimer() {
-        fetch(`http://localhost:8080/timer/${villageId}/buildings`)
-        .then(response => response.json())
-        .then(data => {
-            const buildingTypeId = data['timer'][0]['objectTypeId']
-            const updateTimeFromResponse =  data['timer'][0]['updateTime']
-            const diffTimes = Math.floor((new Date(updateTimeFromResponse) - new Date())/ 1000)
-            if(diffTimes > 0) {
-                setActiveBuildingId(buildingTypeId)
-                setBuildingTimer({time: diffTimes, buildingTypeId: buildingTypeId})
-                setIsBuildingTimerActive(true)
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching building timer:', error);
-            setError(error);
-            setLoading(false);
-        });
-    }
-   
     function initiateBuildingUpgrade(buildingTypeId, buildingLevel) {
         
         const formData = new FormData();
@@ -160,25 +140,6 @@ const Village = () => {
         });
     }
 
-    //TODO löschen (sowohl FE als auch Backend [zumindest der Controller, intern wird das Lvl noch hochgesetzt])
-    function increaseBuildingLvl(buildingTypeId) {
-        const formData = new FormData();
-        formData.append('buildingTypeId', buildingTypeId);
-        formData.append('villageId', villageId);
-        fetch('http://localhost:8080/village/increaseBuildingLvl', {
-            method: 'POST',
-            body: formData
-        })
-
-        .then(() => {
-            console.log("Building Updated")
-            fetchVillageData()
-        })
-        .catch(error => {
-            console.error('Building Update Error:', error);
-        });
-    }
-
     if (loading && !buildingsJsonData) {
         return <div>Loading...</div>;
     }
@@ -187,33 +148,15 @@ const Village = () => {
         return <div>Error: {error.message}</div>;
     }
 
-    return (       
+    return (    
         <div>
             <div className="village">
                 <ResourcePanel currentResources={resources} resourcesFromVillageData={villageData.resources}/>
                 <div className="container">
                     <div className="row align-items-start pb-3">
-                        {villageData.buildings.map((building, index) => (   
-                            <div className="col-4 pb-4" key={index}>
-                                <div className="card text-center">
-                                    <div className="building">
-                                        <h5 className="building-title">
-                                            {building.buildingName}
-                                        </h5>
-                                        <div className="building-body">
-                                            <div className="building">
-                                                <p className="building-outcome">ToDo: Outcome</p>
-                                                <p className="building-level">Level: {building.buildingLevel}</p>
-                                                <p className="building-update-costs">ToDo: Update Costs</p>
-                                                <button type="button" className="primary-button" onClick={()  => initiateBuildingUpgrade(building.buildingTypeId,building.buildingLevel)}
-                                                     disabled={isBuildingTimerActive && buildingTimer.time >= 0}>
-                                                    {activeBuildingId === building.buildingTypeId  && isBuildingTimerActive && buildingTimer.time >= 0 ? `${buildingTimer.time}s` : "Increase Level"}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        {villageData.buildings.map((building, index) => (
+                            <Building key={index} building={building} initiateBuildingUpgrade={initiateBuildingUpgrade} 
+                            isBuildingTimerActive={isBuildingTimerActive} activeBuildingId={activeBuildingId} buildingTimer={buildingTimer}/>                   
                             ))}         
                     </div>
                     <p>Current Timestamp: {villageData.timestampNow}</p>
@@ -221,6 +164,6 @@ const Village = () => {
             </div>
         </div>
     );
-    };
+};
 
 export default Village;
