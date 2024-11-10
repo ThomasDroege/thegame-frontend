@@ -8,8 +8,7 @@ import Building from './buildings/Building';
 const Village = () => {
     const { villageId } = useParams();
     const [villageData, setVillageData] = useState({ resources: [], buildings: [], timestampNow: '' });
-    const [resources, setResources] = useState({});
-    const [buildingsJsonData, setBuildingsJsonData] = useState(null); 
+    const [buildingsJsonData, setBuildingsJsonData] = useState(null);     
 
     // will be needed for showing the actual increasing building (increase button)
     const [activeBuildingId, setActiveBuildingId] = useState(null);
@@ -21,37 +20,17 @@ const Village = () => {
 
     useEffect(() => {
         fetchVillageData()
-        //fetchBuildingTimer()
     }, []);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-        setResources(prevResources => {
-            const updatedResources = { ...prevResources };
-            villageData.resources.forEach(resource => {
-            const resourceName = resource.resourceName.toLowerCase();    
-            updatedResources[resourceName] += resource.resourceIncome/3600;
-            });
-            return updatedResources;
-        });
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [villageData.resources]);
-
+    //TODO: auslagern in Building.js
     useEffect(() => {
         if (isBuildingTimerActive && buildingTimer.time >= 0) {
             const interval = setInterval(() => {
                 setBuildingTimer(prevState => {
-                    console.log("PRV.time", prevState.time)
                     if (prevState.time > 0) {
                         return { ...prevState, time: prevState.time - 1 };
                     } else {
-                        console.log("TEST")
-                        clearInterval(interval); 
-                        
-                        // TODO: Building Lvl wird sofort hochgesetzt mit Zukunfts Zeitstempel
-                        //increaseBuildingLvl(buildingTimer.buildingTypeId); 
+                        clearInterval(interval);                         
                         setIsBuildingTimerActive(false);
                         setActiveBuildingId(null);
                         return { ...prevState, time: 0 };
@@ -60,9 +39,12 @@ const Village = () => {
             }, 1000);
     
             return () => clearInterval(interval);
+        } else {
+            fetchVillageData() // for updating resIncome and buildingLevel after hitting the buildingLevel
         }
     }, [isBuildingTimerActive, buildingTimer]);
 
+    //TODO: auslagern in Building.js
     useEffect(() => {
         fetch('/buildings.json')
             .then(response => {
@@ -82,8 +64,10 @@ const Village = () => {
         .then(response => response.json())
         .then(data => {
             setVillageData(data);
+            console.log("VILLAGE DATA:", data)
             const now = new Date();
 
+            //TODO Funktion auslagern in Building.js
             // Set BuildingTimer for active Building Level Increasing
             data.buildings.forEach(building => {
                 const givenTime = new Date(building.updateTime);
@@ -96,18 +80,6 @@ const Village = () => {
                 } 
             })
 
-            const initialResources = {};
-            data.resources.forEach(resource => { 
-                const givenTime = new Date(resource.updateTime);
-                const hoursSinceLastUpdate = (now-givenTime)/1000/3600;
-                if(initialResources[resource.resourceName.toLowerCase()]){
-                    initialResources[resource.resourceName.toLowerCase()] = initialResources[resource.resourceName.toLowerCase()] + resource.resourceAtUpdateTime + hoursSinceLastUpdate*resource.resourceIncome;    
-                } else {
-                initialResources[resource.resourceName.toLowerCase()] = resource.resourceAtUpdateTime + hoursSinceLastUpdate*resource.resourceIncome;
-                }
-            }, [villageId]);
-            setResources(initialResources);
-            
             setLoading(false);
         })
         .catch(error => {
@@ -116,7 +88,8 @@ const Village = () => {
             setLoading(false);
         });
     }
-
+ 
+    //TODO: Funktion auslagern in Building.js
     function initiateBuildingUpgrade(buildingTypeId, buildingLevel) {
         
         const formData = new FormData();
@@ -128,7 +101,7 @@ const Village = () => {
         })
 
         .then(response => {
-            fetchVillageData()
+           // fetchVillageData()
             setActiveBuildingId(buildingTypeId)
             setBuildingTimer({time: buildingsJsonData[buildingTypeId]["levels"][buildingLevel + 1]["buildingtime"], buildingTypeId: buildingTypeId})
             setIsBuildingTimerActive(true)
@@ -148,18 +121,17 @@ const Village = () => {
         return <div>Error: {error.message}</div>;
     }
 
-    return (    
+    return (      
         <div>
             <div className="village">
-                <ResourcePanel currentResources={resources} resourcesFromVillageData={villageData.resources}/>
+               <ResourcePanel resourcesFromVillageData={villageData.resources} />
                 <div className="container">
                     <div className="row align-items-start pb-3">
                         {villageData.buildings.map((building, index) => (
                             <Building key={index} building={building} initiateBuildingUpgrade={initiateBuildingUpgrade} 
-                            isBuildingTimerActive={isBuildingTimerActive} activeBuildingId={activeBuildingId} buildingTimer={buildingTimer}/>                   
-                            ))}         
+                            isBuildingTimerActive={isBuildingTimerActive} activeBuildingId={activeBuildingId} buildingTimer={buildingTimer}/>))
+                        }         
                     </div>
-                    <p>Current Timestamp: {villageData.timestampNow}</p>
                 </div>
             </div>
         </div>
